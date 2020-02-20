@@ -3,12 +3,12 @@
 
 ### DotnetCore ###
 # .NET Core build folders
-/bin
-/obj
+**/bin
+**/obj
 
 # Common node modules locations
-/node_modules
-/wwwroot/node_modules
+**/node_modules
+**/wwwroot/node_modules
 
 
 # End of https://www.gitignore.io/api/dotnetcore
@@ -21,7 +21,7 @@
 
 ### Sonar ###
 #Sonar generated dir
-/.sonar/
+**/.sonar/
 
 # End of https://www.gitignore.io/api/sonar
 
@@ -30,8 +30,8 @@
 #
 # https://docs.sonarqube.org/display/SCAN/Analyzing+with+SonarQube+Scanner
 # Sonar Scanner working directories
-.sonar/
-.scannerwork/
+**/.sonar/
+**/.scannerwork/
 
 # http://www.sonarlint.org/commandline/
 # SonarLint working directories, configuration files (including credentials)
