@@ -20,4 +20,4 @@ jobs:
     - name: package
       run: dotnet pack ./src/*.csproj
     - name: push
-      run: dotnet nuget push ./src/**/*/*.nupkg
+      run: dotnet nuget push ./src/**/*/*.nupkg --source "github"
