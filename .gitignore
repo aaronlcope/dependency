@@ -1,0 +1,40 @@
+# Created by https://www.gitignore.io/api/dotnetcore
+# Edit at https://www.gitignore.io/?templates=dotnetcore
+
+### DotnetCore ###
+# .NET Core build folders
+/bin
+/obj
+
+# Common node modules locations
+/node_modules
+/wwwroot/node_modules
+
+
+# End of https://www.gitignore.io/api/dotnetcore
+
+# Created by https://www.gitignore.io/api/sonarqube
+# Edit at https://www.gitignore.io/?templates=sonarqube
+
+# Created by https://www.gitignore.io/api/sonar
+# Edit at https://www.gitignore.io/?templates=sonar
+
+### Sonar ###
+#Sonar generated dir
+/.sonar/
+
+# End of https://www.gitignore.io/api/sonar
+
+### SonarQube ###
+# SonarQube ignore files.
+#
+# https://docs.sonarqube.org/display/SCAN/Analyzing+with+SonarQube+Scanner
+# Sonar Scanner working directories
+.sonar/
+.scannerwork/
+
+# http://www.sonarlint.org/commandline/
+# SonarLint working directories, configuration files (including credentials)
+.sonarlint/
+
+# End of https://www.gitignore.io/api/sonarqube
