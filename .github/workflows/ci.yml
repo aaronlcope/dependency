@@ -13,8 +13,11 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.102
-    - name: Build with dotnet
+    - name: compile
       run: dotnet build ./src/*.csproj --configuration Release
-    - name: Test with dotnet
+    - name: test
       run: dotnet test ./test/*.csproj
- #test
+    - name: package
+      run: dotnet pack ./src/*.csproj
+    - name: push
+      run: dotnet nuget push ./src/**/*/*.nupkg
