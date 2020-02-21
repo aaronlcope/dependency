@@ -33,11 +33,8 @@ jobs:
       env:
         GPR_USERNAME: "aaronlcope"
         GPR_TOKEN: ${{secrets.GITHUB_TOKEN}}
-        GPR_SOURCE: https://nuget.pkg.github.com/aaronlcope/dependency/index.json
-      run: nuget sources Add -Name "github" -Source https://nuget.pkg.github.com/aaronlcope/dependency/index.json -Username aaronlcope -Password ${{secrets.GITHUB_TOKEN}}
-      
-    #- name: set an api key (this is dumb)
-    #  run: nuget setapikey "stupid-as-shit" -source "github"
+        GPR_SOURCE: https://nuget.pkg.github.com/aaronlcope/index.json
+      run: nuget sources Add -Name "github" -Source "https://nuget.pkg.github.com/aaronlcope/index.json" -Username "aaroncope@gmail.com" -Password ${{secrets.GITHUB_TOKEN}}
       
     - name: push
       run: nuget push -Source "github" ./src/**/*/*.nupkg -SkipDuplicate
