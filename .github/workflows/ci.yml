@@ -13,9 +13,6 @@ jobs:
       uses: actions/setup-dotnet@v1.4.0
       with:
         dotnet-version: 3.1.101
-     #   source-url: https://nuget.pkg.github.com/aaronlcope/index.json
-     # env:
-     #   NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
         
     - name: compile
       run: dotnet build ./src/*.csproj --configuration Release
@@ -33,13 +30,15 @@ jobs:
       run: which nuget
       
     - name: add nuget source
-      run: nuget sources add -name "github" -source https://nuget.pkg.github.com/aaronlcope/dependency/index.json
+      env:
+        GPR_USERNAME: "aaronlcope"
+        GPR_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        GPR_SOURCE: "https://nuget.pkg.github.com/aaronlcope/index.json"
+      run: nuget sources add -name "github" -source ${GRP_SOURCE} -UserName ${GPR_USERNAME} -Password ${GPR_TOKEN}
       
-    - name: set an api key (this is dumb)
-      run: nuget setapikey "stupid-as-shit" -source "github"
+    #- name: set an api key (this is dumb)
+    #  run: nuget setapikey "stupid-as-shit" -source "github"
       
     - name: push
-      env:
-       NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-      run: nuget push -source "github" -ApiKey $NUGET_AUTH_TOKEN ./src/**/*/*.nupkg -SkipDuplicate
+      run: nuget push -source "github" ./src/**/*/*.nupkg -SkipDuplicate
         
