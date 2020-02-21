@@ -26,8 +26,18 @@ jobs:
     - name: package
       run: dotnet pack ./src/*.csproj --configuration Release
     
+    - name: Setup NuGet.exe for use with actions
+      uses: NuGet/setup-nuget@v1.0.2
+    
+    - name: where is nuget?
+      run: which nuget
+      
+    - name: add nuget source
+      run: nuget sources add -name "github" -source https://nuget.pkg.github.com/aaronlcope/index.json
+      
+    - name: set an api key (this is dumb)
+      run: nuget setapikey stupid-as-shit -source https://nuget.pkg.github.com/aaronlcope/index.json -NonInteractive
+      
     - name: push
-      env: 
-        NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-      run: dotnet nuget push -s https://nuget.pkg.github.com/aaronlcope/index.json -k $NUGET_AUTH_TOKEN ./src/**/*/*.nupkg --skip-duplicate
+      run: nuget push -s "github" -k "stupid-as-shit" ./src/**/*/*.nupkg --skip-duplicate
         
