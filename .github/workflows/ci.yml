@@ -18,7 +18,7 @@ jobs:
       run: dotnet build ./src/*.csproj --configuration Release
     
     - name: test
-      run: dotnet test ./test/*.csproj
+      run: dotnet test ./test/*.csproj --no-build /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=./
     
     # - name: prepare quality analysis with project version
     #  run: | 
