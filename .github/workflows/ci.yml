@@ -25,5 +25,5 @@ jobs:
         nuget-api-key: ${secrets.PACKAGE}
         nuget-api-key-source: https://nuget.pkg.github.com/aaronlcope/index.json
     - name: push
-      run: dotnet nuget push ./src/**/*/*.nupkg
+      run: nuget push ./src/**/*/*.nupkg
         
