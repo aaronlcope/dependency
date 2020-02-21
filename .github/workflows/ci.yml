@@ -23,5 +23,5 @@ jobs:
     - name: package
       run: dotnet pack ./src/*.csproj
     - name: push
-      run: dotnet nuget push ./src/**/*/*.nupkg
+      run: dotnet nuget push ./src/**/*/*.nupkg -k ${{secrets.PACKAGE}}
         
