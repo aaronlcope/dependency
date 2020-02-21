@@ -13,9 +13,9 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.101
-        source-url: https://nuget.pkg.github.com/aaronlcope/index.json
-      env:
-        NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+     #   source-url: https://nuget.pkg.github.com/aaronlcope/index.json
+     # env:
+     #   NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
         
     - name: compile
       run: dotnet build ./src/*.csproj --configuration Release
@@ -24,8 +24,10 @@ jobs:
       run: dotnet test ./test/*.csproj
     
     - name: package
-      run: dotnet pack ./src/*.csproj
+      run: dotnet pack ./src/*.csproj --configuration Release
     
     - name: push
-      run: dotnet nuget push ./src/**/*/*.nupkg --skip-duplicate
+      env: 
+        NUGET_AUTH_TOKEN: ${{secrets.PACKAGE}}
+      run: dotnet nuget push -s https://nuget.pkg.github.com/aaronlcope -k $NUGET_AUTH_TOKEN ./src/**/*/*.nupkg --skip-duplicate
         
