@@ -34,7 +34,7 @@ jobs:
         GPR_USERNAME: "aaronlcope"
         GPR_TOKEN: ${{secrets.GITHUB_TOKEN}}
         GPR_SOURCE: https://nuget.pkg.github.com/aaronlcope/index.json
-      run: nuget sources Add -Name "github" -Source ${GRP_SOURCE} -Username ${GPR_USERNAME} -Password ${GPR_TOKEN}
+      run: nuget sources Add -Name "github" -Source https://nuget.pkg.github.com/aaronlcope/index.json -Username aaronlcope -Password ${{secrets.GITHUB_TOKEN}}
       
     #- name: set an api key (this is dumb)
     #  run: nuget setapikey "stupid-as-shit" -source "github"
