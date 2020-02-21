@@ -13,17 +13,15 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.102
+        source-url: https://nuget.pkg.github.com/aaronlcope/index.json
+      env:
+        NUGET_AUTH_TOKEN: ${{secrets.PACKAGE}}
     - name: compile
       run: dotnet build ./src/*.csproj --configuration Release
     - name: test
       run: dotnet test ./test/*.csproj
     - name: package
       run: dotnet pack ./src/*.csproj
-    - name: nuget setup
-      uses: Nuget/setup-nuget@v1.0.2
-      with:
-        nuget-api-key: ${secrets.PACKAGE}
-        nuget-api-key-source: https://nuget.pkg.github.com/aaronlcope/index.json
     - name: push
-      run: nuget push ./src/**/*/*.nupkg
+      run: dotnet nuget push ./src/**/*/*.nupkg
         
