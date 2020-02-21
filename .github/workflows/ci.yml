@@ -10,7 +10,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Setup .NET Core
-      uses: actions/setup-dotnet@v1
+      uses: actions/setup-dotnet@v1.4.0
       with:
         dotnet-version: 3.1.101
      #   source-url: https://nuget.pkg.github.com/aaronlcope/index.json
@@ -36,8 +36,8 @@ jobs:
       run: nuget sources add -name "github" -source https://nuget.pkg.github.com/aaronlcope/index.json
       
     - name: set an api key (this is dumb)
-      run: nuget setapikey stupid-as-shit -source https://nuget.pkg.github.com/aaronlcope/index.json -NonInteractive
+      run: nuget setapikey "stupid-as-shit" -source https://nuget.pkg.github.com/aaronlcope/index.json -NonInteractive
       
     - name: push
-      run: nuget push -source "github" -k "stupid-as-shit" ./src/**/*/*.nupkg -SkipDuplicate
+      run: nuget push -source "github" -ApiKey "stupid-as-shit" ./src/**/*/*.nupkg -SkipDuplicate
         
