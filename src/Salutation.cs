@@ -6,7 +6,7 @@ namespace dependency
     {
         public string Compose(string audience) 
         {
-            if (audience == null) {
+            /* if (audience == null) {
                 // do something goofy to violate rule.
                 int target = -5;
                 int num = 3;
@@ -16,7 +16,7 @@ namespace dependency
 
                 GC.Collect(2, GCCollectionMode.Optimized); // Noncompliant
 
-            }
+            }*/
 
             if (string.IsNullOrWhiteSpace(audience)) 
             {
@@ -30,9 +30,10 @@ namespace dependency
             // return $"Hello {audience}";
         }
 
-        public void Foo()
+        /* public void Foo()
         {
             var g = new Guid(); // Noncompliant - what's the intent?
         }
+        */
     }
 }
