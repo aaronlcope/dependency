@@ -27,11 +27,24 @@ jobs:
     #    sed -i -e "s/x.y.z/$V/g" src/sonar-project.properties
     #    cat src/sonar-project.properties
       
-    - name: quality analysis
-      uses: SonarSource/sonarcloud-github-action@master
+    # - name: quality analysis
+    #  uses: SonarSource/sonarcloud-github-action@master
+    #  env:
+    #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #    SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+    
+    - name: dotnet-sonarscanner
+      uses: Secbyte/dotnet-sonarscanner@2.1
+      with:
+        buildCommand: dotnet build ./src/*.csproj
+        testCommand: dotnet test ./test/*.csproj
+        projectKey: aaronlcope_dependency
+        projectName: dependency
+        sonarOrganisation: aaronlcope
+        beginArguments: /d:sonar.verbose="true" /d:sonar.cs.opencover.reportsPaths="/path/to/coverage.xml" /d:sonar.coverage.exclusions="**/*.cs"
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     
     - name: package
       run: dotnet pack ./src/*.csproj --configuration Release
