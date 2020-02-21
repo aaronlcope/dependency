@@ -29,5 +29,5 @@ jobs:
     - name: push
       env: 
         NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-      run: dotnet nuget push -s https://nuget.pkg.github.com/aaronlcope -k $NUGET_AUTH_TOKEN ./src/**/*/*.nupkg --skip-duplicate
+      run: dotnet nuget push -s https://nuget.pkg.github.com/aaronlcope/index.json -k $NUGET_AUTH_TOKEN ./src/**/*/*.nupkg --skip-duplicate
         
