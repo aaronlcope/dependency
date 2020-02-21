@@ -13,6 +13,9 @@ namespace dependency
 
                 target =- num;  // Noncompliant; target = -3. Is that really what's meant?
                 target =+ num; // Noncompliant; target = 3
+
+                GC.Collect(2, GCCollectionMode.Optimized); // Noncompliant
+
             }
 
             if (string.IsNullOrWhiteSpace(audience)) 
