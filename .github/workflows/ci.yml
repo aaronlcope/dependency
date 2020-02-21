@@ -33,10 +33,10 @@ jobs:
       run: which nuget
       
     - name: add nuget source
-      run: nuget sources add -name "github" -source https://nuget.pkg.github.com/aaronlcope/index.json
+      run: nuget sources add -name "github" -source https://nuget.pkg.github.com/aaronlcope/dependency/index.json
       
     - name: set an api key (this is dumb)
-      run: nuget setapikey "stupid-as-shit" -source https://nuget.pkg.github.com/aaronlcope/index.json -NonInteractive
+      run: nuget setapikey "stupid-as-shit" -source "github"
       
     - name: push
       env:
