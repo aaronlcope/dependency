@@ -19,3 +19,11 @@ jobs:
       run: dotnet test ./test/*.csproj
     - name: package
       run: dotnet pack ./src/*.csproj
+    - name: nuget setup
+      uses: Nuget/setup-nuget@v1.0.2
+      with:
+        nuget-api-key: ${secrets.PACKAGE}
+        nuget-api-key-source: https://nuget.pkg.github.com/aaronlcope/index.json
+    - name: push
+      run: dotnet nuget push ./src/**/*/*.nupkg
+        
