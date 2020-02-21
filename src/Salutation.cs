@@ -29,5 +29,10 @@ namespace dependency
             // return 
             // return $"Hello {audience}";
         }
+
+        public void Foo()
+        {
+            var g = new Guid(); // Noncompliant - what's the intent?
+        }
     }
 }
