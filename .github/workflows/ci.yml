@@ -25,6 +25,7 @@ jobs:
         CSPROJ_FILE=src/dependency.csproj
         V=$(xmllint --xpath 'string(/Project/PropertyGroup/Version)' $CSPROJ_FILE
         sed -i -e "s/x.y.z/$V/g" src/sonar-project.properties
+        cat src/sonar-project.properties
       
     - name: quality analysis
       uses: SonarSource/sonarcloud-github-action@master
