@@ -13,7 +13,7 @@ jobs:
       uses: actions/setup-dotnet@v1.4.0
       with:
         dotnet-version: 3.1.101
-     #   source-url: https://nuget.pkg.github.com/aaronlcope/index.json
+     #   source-url: https://nuget.pkg.github.com/aaronlcope/dependency/index.json
      # env:
      #   NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
         
@@ -35,9 +35,11 @@ jobs:
     - name: add nuget source
       run: nuget sources add -name "github" -source https://nuget.pkg.github.com/aaronlcope/dependency/index.json
       
-    - name: set an api key (this is dumb)
-      run: nuget setapikey "stupid-as-shit" -source https://nuget.pkg.github.com/aaronlcope/dependency/index.json -NonInteractive
+    #- name: set an api key (this is dumb)
+    #  run: nuget setapikey "stupid-as-shit" -source https://nuget.pkg.github.com/aaronlcope/dependency/index.json -NonInteractive
       
     - name: push
-      run: nuget push -source "github" -ApiKey "stupid-as-shit" ./src/**/*/*.nupkg -SkipDuplicate
+      env:
+       NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      run: nuget push -source "github" -ApiKey $NUGET_AUTH_TOKEN ./src/**/*/*.nupkg -SkipDuplicate
         
