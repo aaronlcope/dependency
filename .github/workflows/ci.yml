@@ -15,13 +15,17 @@ jobs:
         dotnet-version: 3.1.102
         source-url: https://nuget.pkg.github.com/aaronlcope/index.json
       env:
-        NUGET_AUTH_TOKEN: ${{secrets.PACKAGE}}
+        NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        
     - name: compile
       run: dotnet build ./src/*.csproj --configuration Release
+    
     - name: test
       run: dotnet test ./test/*.csproj
+    
     - name: package
       run: dotnet pack ./src/*.csproj
+    
     - name: push
-      run: dotnet nuget push ./src/**/*/*.nupkg -k ${{secrets.PACKAGE}}
+      run: dotnet nuget push ./src/**/*/*.nupkg --skip-duplicate
         
