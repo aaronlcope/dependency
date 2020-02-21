@@ -40,4 +40,3 @@ jobs:
       
     - name: push
       run: nuget push -Source "github" ./src/**/*/*.nupkg -SkipDuplicate
-        
