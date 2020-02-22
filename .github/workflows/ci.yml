@@ -19,9 +19,9 @@ jobs:
         
     - name: put sonarscanner in the path
       run: |
-        echo "old: $PATH" \
-        export PATH="$PATH:$HOME/.dotnet/tools" \
-        echo "new: $PATH" \
+        echo "old: $PATH" 
+        export PATH="$PATH:$HOME/.dotnet/tools" 
+        echo "new: $PATH" 
         dotnet tool list --tool-path "$HOME/.dotnet/tools"
         type dotnet-sonarscanner
  
