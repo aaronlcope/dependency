@@ -14,20 +14,6 @@ jobs:
       with:
         dotnet-version: 3.1.101
     
-    #- name: setup dotnet-sonarscanner
-    #  run: dotnet tool install dotnet-sonarscanner --tool-path "$HOME/.dotnet/tools"
-        
-    #- name: put sonarscanner in the path
-    #  run: |
-    #    echo "old: $PATH" 
-    #    export PATH="$PATH:$HOME/.dotnet/tools" 
-    #    echo "new: $PATH" 
-    #    dotnet tool list --tool-path "$HOME/.dotnet/tools"
-    #    type dotnet-sonarscanner
-        
-    #- name: attempt
-    #  run: dotnet sonarscanner /h
- 
     - name: compile
       run: dotnet build ./src/*.csproj --configuration Release
     
@@ -44,7 +30,7 @@ jobs:
         dotnet tool install dotnet-sonarscanner --tool-path "$HOME/.dotnet/tools"
         export PATH="$PATH:$HOME/.dotnet/tools"
         ./scripts/quality.sh -u "https://sonarcloud.io" -t "${{ secrets.SONAR_TOKEN }}" -o "$on" -k "$on_$rn" -n "$rn" -b "$branch_name"
-    
+
     #- name: package
     #  run: dotnet pack ./src/*.csproj --configuration Release
     
