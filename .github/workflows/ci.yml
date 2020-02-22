@@ -24,6 +24,7 @@ jobs:
         echo "new: $PATH" 
         dotnet tool list --tool-path "$HOME/.dotnet/tools"
         type dotnet-sonarscanner
+        dotnet sonarscanner /h
  
     #- name: compile
     # run: dotnet build ./src/*.csproj --configuration Release
