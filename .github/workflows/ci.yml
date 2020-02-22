@@ -19,8 +19,9 @@ jobs:
         
     - name: put sonarscanner in the path
       run: |
-        echo "$PATH"
-        #export PATH="$PATH:$HOME/.dotnet/tools"
+        echo "old: $PATH"
+        export PATH="$PATH:$HOME/.dotnet/tools"
+        echo "new: $PATH"
     
     - name: compile
       run: dotnet build ./src/*.csproj --configuration Release
