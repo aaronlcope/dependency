@@ -15,11 +15,12 @@ jobs:
         dotnet-version: 3.1.101
     
     - name: setup dotnet-sonarscanner
-      run: dotnet tool install dotnet-sonarscanner --tool-path ~/.dotnet/tools
+      run: dotnet tool install dotnet-sonarscanner --tool-path "$HOME/.dotnet/tools"
         
     - name: put sonarscanner in the path
       run: |
-        export PATH="$PATH:$HOME/.dotnet/tools"
+        echo "$PATH"
+        #export PATH="$PATH:$HOME/.dotnet/tools"
     
     - name: compile
       run: dotnet build ./src/*.csproj --configuration Release
