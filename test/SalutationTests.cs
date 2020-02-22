@@ -26,7 +26,7 @@ namespace dependency.test
         #endregion
 
         #region boundary testing
-
+        /* 
         [Fact]
         public void ShouldThrowExceptionWhenProvidedNullAudience()
         {
@@ -47,7 +47,7 @@ namespace dependency.test
             var salutation = initSalutation();
             Assert.Throws<ArgumentNullException>(() => salutation.Compose("  "));
         }
-
+        */
         #endregion
 
         #region factories/helpers/initializers

@@ -32,6 +32,7 @@
 # Sonar Scanner working directories
 **/.sonar/
 **/.scannerwork/
+**/.sonarqube/
 
 # http://www.sonarlint.org/commandline/
 # SonarLint working directories, configuration files (including credentials)
