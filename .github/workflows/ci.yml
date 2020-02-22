@@ -17,4 +17,32 @@ jobs:
     - name: compile
       run: dotnet build ./src/*.csproj --configuration Release
     
+      - name: test
+      run: dotnet test ./test/*.csproj --no-build /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=coverage.opencover.xml
     
+    - name: setup dotnet-sonarscanner
+      run: dotnet tool install dotnet-sonarscanner --global
+
+    - name: quality
+      run: |
+        branch_ref="${{ github.ref }}"
+        branch_name=${branch_ref##*/}  # retain the part after the last slash \
+        oan="${{ github.repository }}" \
+        on=${oan%%/*} # retain the part before the last slash \
+        rn=${oan##*/}  # retain the part after the last slash \
+        ./scripts/quality.sh -u "https://sonarcloud.io" -t "${{ secrets.SONAR_TOKEN }}" -o "$on" -k "$on_$rn" -n "$rn" -b "$branch_name"
+    
+    - name: package
+      run: dotnet pack ./src/*.csproj --configuration Release
+    
+    - name: Setup NuGet.exe for use with actions
+      uses: NuGet/setup-nuget@master
+    
+    - name: where is nuget?
+      run: which nuget
+      
+    - name: add nuget source
+      run: nuget sources Add -Name "github" -Source "https://nuget.pkg.github.com/aaronlcope/index.json" -Username "aaroncope@gmail.com" -Password ${{secrets.GITHUB_TOKEN}}
+      
+    - name: push
+      run: nuget push -Source "github" ./src/**/*/*.nupkg -SkipDuplicate

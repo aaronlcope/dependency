@@ -30,6 +30,10 @@ case $key in
     SONAR_PROJECT_NAME="$2"
     shift #past arg
     ;;
+    -b|--sonar-branch-name)
+    SONAR_BRANCH_NAME="$2"
+    shift #past arg
+    ;;
     *)
         #unknown option
         args+=($1)
@@ -44,7 +48,7 @@ function main {
     dir="$(pwd)"
     version=$(parseCsProjVersion "src/$SONAR_PROJECT_NAME.csproj")
     dotnet build-server shutdown
-    dotnet sonarscanner begin /o:"${SONAR_ORGANIZATION}" /k:"${SONAR_PROJECT_KEY}" /n:"${SONAR_PROJECT_NAME}" /v:"${version}" /d:sonar.host.url="${SONAR_HOST_URL}" /d:sonar.login="${SONAR_LOGIN_TOKEN}" /d:sonar.language="cs" /d:sonar.exclusions="**/bin/**/*,**/obj/**/*,test/**/*" /d:sonar.cs.opencover.reportsPaths="${dir}/lcov.opencover.xml"
+    dotnet sonarscanner begin /o:"${SONAR_ORGANIZATION}" /k:"${SONAR_PROJECT_KEY}" /n:"${SONAR_PROJECT_NAME}" /v:"${version}" /d:sonar.host.url="${SONAR_HOST_URL}" /d:sonar.login="${SONAR_LOGIN_TOKEN}" /d:sonar.language="cs" /d:sonar.exclusions="**/bin/**/*,**/obj/**/*,test/**/*" /d:sonar.cs.opencover.reportsPaths="${dir}/lcov.opencover.xml" /d:sonar.branch.name="${SONAR_BRANCH_NAME}"
     dotnet restore
     dotnet build
     dotnet test ./test/*.test.csproj --no-build /p:CollectCoverage=true /p:CoverletOutputFormat=\"opencover,lcov\" /p:CoverletOutput=../lcov
