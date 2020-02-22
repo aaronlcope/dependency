@@ -13,11 +13,5 @@ namespace dependency
 
             return "Hello " + audience;
         }
-
-        /* 
-        public string Introduce(decimal debt) {
-            return "here's some bad code.";
-        }
-        */
     }
 }
