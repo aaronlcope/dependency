@@ -18,7 +18,8 @@ jobs:
       run: dotnet tool install dotnet-sonarscanner --global
         
     - name: put sonarscanner in the path
-      run: export PATH="$PATH:$HOME/.dotnet/tools"
+      run: |
+        /etc/profile.d/dotnet-cli-tools-bin-path.sh
     
     - name: compile
       run: dotnet build ./src/*.csproj --configuration Release
