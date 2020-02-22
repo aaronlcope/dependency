@@ -21,10 +21,10 @@ jobs:
       run: dotnet test ./test/*.csproj --no-build /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=coverage.opencover.xml
     
     - name: setup dotnet-sonarscanner
-      run: sudo dotnet tool install dotnet-sonarscanner --global
+      run: dotnet tool install dotnet-sonarscanner --global
         
     - name: put sonarscanner in the path
-      run: sudo export PATH="$PATH:$HOME/.dotnet/tools"
+      run: export PATH="$PATH:$HOME/.dotnet/tools"
 
     - name: quality
       run: |
