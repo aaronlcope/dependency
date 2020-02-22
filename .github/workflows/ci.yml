@@ -17,8 +17,10 @@ jobs:
     - name: learn some stuff
       run: |
         oan="${{ github.repository }}" \
-        rn=${oan##*/}  # retain the part after the last slash
-        echo "$rn"
+        on=${oan%%/*} # retain the part before the last slash \
+        rn=${oan##*/}  # retain the part after the last slash \
+        echo "org name: $on" \
+        echo "repo name: $rn"
         
     #- name: compile
     #  run: dotnet build ./src/*.csproj --configuration Release
