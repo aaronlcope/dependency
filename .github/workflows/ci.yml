@@ -17,7 +17,7 @@ jobs:
     - name: compile
       run: dotnet build ./src/*.csproj --configuration Release
     
-      - name: test
+    - name: test
       run: dotnet test ./test/*.csproj --no-build /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=coverage.opencover.xml
     
     - name: setup dotnet-sonarscanner
