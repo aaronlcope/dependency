@@ -50,7 +50,7 @@ function main {
     dir="$(pwd)"
     setBranchSpecifier    
     version=$(parseCsProjVersion "src/$SONAR_PROJECT_NAME.csproj")
-    dotnet sonarscanner begin /o:"${SONAR_ORGANIZATION}" /k:"${SONAR_PROJECT_KEY}" /n:"${SONAR_PROJECT_NAME}" /v:"${version}" /d:sonar.host.url="${SONAR_HOST_URL}" /d:sonar.login="${SONAR_LOGIN_TOKEN}" /d:sonar.language="cs" /d:sonar.exclusions="**/bin/**/*,**/obj/**/*,test/**/*" /d:sonar.cs.opencover.reportsPaths="${dir}/lcov.opencover.xml" $BRANCH_SPECIFIER
+    dotnet sonarscanner begin /o:"${SONAR_ORGANIZATION}" /k:"${SONAR_PROJECT_KEY}" /n:"${SONAR_PROJECT_NAME}" /v:"${version}" /d:sonar.host.url="${SONAR_HOST_URL}" /d:sonar.login="${SONAR_LOGIN_TOKEN}" /d:sonar.language="cs" /d:sonar.exclusions="**/bin/**/*,**/obj/**/*,test/**/*" /d:sonar.cs.opencover.reportsPaths="${dir}/lcov.opencover.xml"$BRANCH_SPECIFIER
     dotnet restore
     dotnet build
     dotnet test ./test/*.test.csproj --no-build /p:CollectCoverage=true /p:CoverletOutputFormat=\"opencover,lcov\" /p:CoverletOutput=../lcov
@@ -68,7 +68,7 @@ function setBranchSpecifier {
     if [ $1 = "master" ]; then
         BRANCH_SPECIFIER=""
     else
-        BRANCH_SPECIFIER="/d:sonar.branch.name=$1"
+        BRANCH_SPECIFIER=" /d:sonar.branch.name=$1"
     fi
 }
 
