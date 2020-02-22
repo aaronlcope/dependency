@@ -39,6 +39,10 @@
 
 # End of https://www.gitignore.io/api/sonarqube
 
+#this file may contain the token required for local analysis, but 
+#this should not make it's way in plain text into version control
+**/sonar.txt
+
 # Created by https://www.gitignore.io/api/code
 # Edit at https://www.gitignore.io/?templates=code
 
