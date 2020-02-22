@@ -48,8 +48,8 @@ done
 #- Main function
 function main {
     dir="$(pwd)"
+    setBranchSpecifier    
     version=$(parseCsProjVersion "src/$SONAR_PROJECT_NAME.csproj")
-    echo "/o:${SONAR_ORGANIZATION}" "/k:${SONAR_PROJECT_KEY}" "/n:${SONAR_PROJECT_NAME}" "/v:${version}" "/d:sonar.host.url=${SONAR_HOST_URL}" "/d:sonar.login=${SONAR_LOGIN_TOKEN}" "/d:sonar.language=cs" "/d:sonar.exclusions=**/bin/**/*,**/obj/**/*,test/**/*" "/d:sonar.cs.opencover.reportsPaths=${dir}/lcov.opencover.xml" "$BRANCH_SPECIFIER"
     dotnet sonarscanner begin /o:"${SONAR_ORGANIZATION}" /k:"${SONAR_PROJECT_KEY}" /n:"${SONAR_PROJECT_NAME}" /v:"${version}" /d:sonar.host.url="${SONAR_HOST_URL}" /d:sonar.login="${SONAR_LOGIN_TOKEN}" /d:sonar.language="cs" /d:sonar.exclusions="**/bin/**/*,**/obj/**/*,test/**/*" /d:sonar.cs.opencover.reportsPaths="${dir}/lcov.opencover.xml" $BRANCH_SPECIFIER
     dotnet restore
     dotnet build
