@@ -32,7 +32,8 @@ jobs:
         ./scripts/quality.sh -u "https://sonarcloud.io" -t "${{ secrets.SONAR_TOKEN }}" -o "$on" -k "$on_$rn" -n "$rn" -b "$branch_name"
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
     - name: package
       run: dotnet pack ./src/*.csproj --configuration Release
     
