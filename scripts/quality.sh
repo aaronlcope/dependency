@@ -11,7 +11,7 @@ while [[ $# > 0 ]]
 do
 key="$1"
 
-case $key in 
+case $key in
     -u|--sonar-host-url)
     SONAR_HOST_URL="$2"
     shift #past arg
