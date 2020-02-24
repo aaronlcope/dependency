@@ -73,13 +73,11 @@ function main {
 #- for the sonar
 #- cli
 function setBranchSpecifier {
-    #echo "THE BRANCH NAME IS: $1"
-    #local branch="/d:sonar.branch.name=$1"
-    #if [ $1 = "master" ]; then
-    #    BRANCH_SPECIFIER="$branch"
-    #else
-        BRANCH_SPECIFIER="/d:sonar.branch.name=$1 /d:sonar.branch.target=master"
-    #fi
+    if [ $1 = "master" ]; then
+        BRANCH_SPECIFIER=""
+    else
+        BRANCH_SPECIFIER="/d:sonar.branch.name=$1"
+    fi
 }
 
 #---------------
