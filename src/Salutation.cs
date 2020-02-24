@@ -13,9 +13,5 @@ namespace dependency
 
             return "Hello " + audience;
         }
-
-        public void DoNothing() {
-            //adding some more debt for example purposes.
-        }
     }
 }
