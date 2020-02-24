@@ -27,7 +27,7 @@ jobs:
         oan="${{ github.repository }}" 
         on=${oan%%/*} # retain the part before the last slash 
         rn=${oan##*/}  # retain the part after the last slash 
-        key="$on\_$rn"
+        key="{$on}_{$rn}"
         dotnet tool install dotnet-sonarscanner --tool-path "$HOME/.dotnet/tools"
         export PATH="$PATH:$HOME/.dotnet/tools"
         echo "org: $on"
