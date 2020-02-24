@@ -27,9 +27,13 @@ jobs:
         oan="${{ github.repository }}" 
         on=${oan%%/*} # retain the part before the last slash 
         rn=${oan##*/}  # retain the part after the last slash 
+        key="${on}_${rn}"
         dotnet tool install dotnet-sonarscanner --tool-path "$HOME/.dotnet/tools"
         export PATH="$PATH:$HOME/.dotnet/tools"
-        ./scripts/quality.sh -u "https://sonarcloud.io" -t "${{ secrets.SONAR_TOKEN }}" -o "$on" -k "$on_$rn" -n "$rn" -b "$branch_name"
+        echo "org: $on"
+        echo "repo: $rn"
+        echo "key: $key"
+        ./scripts/quality.sh -u "https://sonarcloud.io" -t "${{ secrets.SONAR_TOKEN }}" -o "$on" -k "$key" -n "$rn" -b "$branch_name"
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
