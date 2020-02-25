@@ -11,7 +11,7 @@ namespace dependency
                 throw new ArgumentNullException("You need to address an audience.");
             }
 
-            return "Hello " + audience;
+            return $"Hello {audience}";
         }
     }
 }
