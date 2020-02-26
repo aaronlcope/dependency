@@ -19,11 +19,22 @@ jobs:
     
     - name: test
       run: dotnet test ./test/*.csproj --no-build
+    
+    - name: jq?
+      run: |
+        which jq
+        type jq
+    
+    #- name: install jq
+    #  run: |
+    #  apt-get update
+    #  apt-get install --no-install-recommends -y jq findutils curl ca-certificates  
 
     - name: quality
       run: |
         sonar_host_url="https://sonarcloud.io"
         github_pullrequest_number=$(jq --raw-output .pull_request.number "${{ github.event_path }}")
+        github_event_action=$(jq -r ".action" "${{ github.event_path }}")
         github_branch_ref="${{ github.ref }}"
         github_branch_name=${github_branch_ref##*/}  # retain the part after the last slash 
         github_repository_key="${{ github.repository }}" 
@@ -39,10 +50,11 @@ jobs:
         echo "github branch ref: $github_branch_ref"
         echo "github branch name: $github_branch_name"
         echo "github pull request number: $github_pullrequest_number"
+        echo "github event action: $github_event_action"        
         
-        dotnet tool install dotnet-sonarscanner --tool-path "$HOME/.dotnet/tools"
-        export PATH="$PATH:$HOME/.dotnet/tools"
-        ./scripts/quality.sh -u "$sonar_host_url" -t "${{ secrets.SONAR_TOKEN }}" -o "$sonar_organization_name" -k "$sonar_project_key" -n "$sonar_project_name" -g "$github_repository_key" -r "$github_branch_ref" -b "$github_branch_name" -p "github_pullrequest_number"
+        #dotnet tool install dotnet-sonarscanner --tool-path "$HOME/.dotnet/tools"
+        #export PATH="$PATH:$HOME/.dotnet/tools"
+        #./scripts/quality.sh -u "$sonar_host_url" -t "${{ secrets.SONAR_TOKEN }}" -o "$sonar_organization_name" -k "$sonar_project_key" -n "$sonar_project_name" -g "$github_repository_key" -r "$github_branch_ref" -b "$github_branch_name" -p "$github_pullrequest_number" -e "$github_event_action"
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

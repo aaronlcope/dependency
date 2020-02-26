@@ -48,6 +48,18 @@ case $key in
     GITHUB_PULLREQUEST_NUMBER="$2"
     shift #past arg
     ;;
+    -e|--github-event-name)
+    GITHUB_EVENT_NAME="$2"
+    shift #past arg
+    ;;
+    -x|--github-event-path)
+    GITHUB_EVENT_PATH="$2"
+    shift #past arg
+    ;;
+    -a|--github-event-action)
+    GITHUB_EVENT_ACTION="$2"
+    shift #past arg
+    ;;
     *)
         #unknown option
         args+=($1)
@@ -59,6 +71,17 @@ done
 #---------------
 #- Main function
 function main {
+    
+    #if [[ "${GITHUB_EVENT_NAME}" == "pull_request" ]]; then
+    #    GITHUB_EVENT_ACTION=$(jq -r ".action" "${GITHUB_EVENT_PATH}")
+    #    if [[ "${GITHUB_EVENT_ACTION}" != "opened" ]]; then
+    #        echo "No need to run analysis. It is already triggered by the push event."
+    #        exit 78
+    #    else
+
+    #    fi
+    #fi
+
     dir="$(pwd)"
     setBranchSpecifier $GITHUB_BRANCH_NAME
     version=$(parseCsProjVersion "src/$SONAR_PROJECT_NAME.csproj")
@@ -79,12 +102,12 @@ function main {
 
     # doc for sonarcloud analysis: https://sonarcloud.io/documentation/analysis/overview/
 
-    #dotnet sonarscanner begin /o:"${SONAR_ORGANIZATION}" /k:"${SONAR_PROJECT_KEY}" /n:"${SONAR_PROJECT_NAME}" /v:"${version}" /d:sonar.host.url="${SONAR_HOST_URL}" /d:sonar.login="${SONAR_LOGIN_TOKEN}" /d:sonar.language=cs /d:sonar.exclusions=**/bin/**/*,**/obj/**/*,test/**/* /d:sonar.cs.opencover.reportsPaths="${dir}/lcov.opencover.xml" "$BRANCH_SPECIFIER"
-    #    dotnet restore
-    #    dotnet build
-    #    dotnet test ./test/*.test.csproj --no-build /p:CollectCoverage=true /p:CoverletOutputFormat=\"opencover,lcov\" /p:CoverletOutput=../lcov
-    #dotnet sonarscanner end /d:sonar.login="${SONAR_LOGIN_TOKEN}"
-    #rm -f lcov.info lcov.opencover.xml
+    dotnet sonarscanner begin /o:"${SONAR_ORGANIZATION}" /k:"${SONAR_PROJECT_KEY}" /n:"${SONAR_PROJECT_NAME}" /v:"${version}" /d:sonar.host.url="${SONAR_HOST_URL}" /d:sonar.login="${SONAR_LOGIN_TOKEN}" /d:sonar.language=cs /d:sonar.exclusions=**/bin/**/*,**/obj/**/*,test/**/* /d:sonar.cs.opencover.reportsPaths="${dir}/lcov.opencover.xml" "$BRANCH_SPECIFIER"
+        dotnet restore
+        dotnet build
+        dotnet test ./test/*.test.csproj --no-build /p:CollectCoverage=true /p:CoverletOutputFormat=\"opencover,lcov\" /p:CoverletOutput=../lcov
+    dotnet sonarscanner end /d:sonar.login="${SONAR_LOGIN_TOKEN}"
+    rm -f lcov.info lcov.opencover.xml
 }
 #---------------
 
