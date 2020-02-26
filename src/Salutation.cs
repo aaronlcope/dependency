@@ -8,7 +8,7 @@ namespace dependency
         {
             if (string.IsNullOrWhiteSpace(audience)) 
             {
-                throw new ArgumentNullException("You need to address an audience.");
+                throw new ArgumentNullException("You need to address an audience.", audience);
             }
 
             return $"Hello {audience}";
