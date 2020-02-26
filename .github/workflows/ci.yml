@@ -20,23 +20,28 @@ jobs:
     - name: test
       run: dotnet test ./test/*.csproj --no-build
 
-    #- name: quality
-    #  run: |
-    #    branch_ref="${{ github.ref }}"
-    #    branch_name=${branch_ref##*/}  # retain the part after the last slash 
-    #    oan="${{ github.repository }}" 
-    #    on=${oan%%/*} # retain the part before the last slash 
-    #    rn=${oan##*/}  # retain the part after the last slash 
-    #    key="${on}_${rn}"
+    - name: quality
+      run: |
+        github_pullrequest_number=$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
+        github_branch_ref="${{ github.ref }}"
+        github_branch_name=${branch_ref##*/}  # retain the part after the last slash 
+        github_repository_key="${{ github.repository }}" 
+        github_organization_name=${github_repository_key%%/*} # retain the part before the last slash 
+        github_repository_name=${github_repository_key##*/}  # retain the part after the last slash 
+        sonar_project_key="${github_organization_name}_${github_repository_name}"
+        echo "github organization: $github_organization_name"
+        echo "github repository key: $github_repository_key"
+        echo "github repository name: $github_repository_name"
+        echo "github branch ref: $github_branch_ref"
+        echo "github branch name: $github_branch_name"
+        echo "github pull request number: $github_pullrequest_number"
+        echo "sonar project key: $sonar_project_key"
     #    dotnet tool install dotnet-sonarscanner --tool-path "$HOME/.dotnet/tools"
     #    export PATH="$PATH:$HOME/.dotnet/tools"
-    #    echo "org: $on"
-    #    echo "repo: $rn"
-    #    echo "key: $key"
     #    ./scripts/quality.sh -u "https://sonarcloud.io" -t "${{ secrets.SONAR_TOKEN }}" -o "$on" -k "$key" -n "$rn" -b "$branch_name"
-    #  env:
-    #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    #    SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
     #- name: SonarCloud Scan
     #  uses: sonarsource/sonarcloud-github-action@master

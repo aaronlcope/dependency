@@ -75,10 +75,15 @@ function main {
 #- for the sonar
 #- cli
 function setBranchSpecifier {
+    local basis="/d:sonar.branch.name=$1"
+    echo "$basis"
     #if [ $1 = "master" ]; then
-    #    BRANCH_SPECIFIER=""
+    #    BRANCH_SPECIFIER="$basis"
     #else
-        BRANCH_SPECIFIER="/d:sonar.branch.name=$1"
+    #    BRANCH_SPECIFIER="$basis /d:sonar.pullrequest.github.repository=$GITHUB_REPOSITORY_IDENTIFIER \
+    #    /d:sonar.pullrequest.key=$PULL_REQUEST_KEY \
+    #    /d:sonar.pullrequest.branch=$PULL_REQUEST_BRANCH \
+    #    /d:sonar.pullrequest.base=master"
     #fi
 }
 
