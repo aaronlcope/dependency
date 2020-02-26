@@ -40,7 +40,7 @@ jobs:
         
         dotnet tool install dotnet-sonarscanner --tool-path "$HOME/.dotnet/tools"
         export PATH="$PATH:$HOME/.dotnet/tools"
-        ./scripts/quality.sh 
+        ./scripts/quality.sh \
         -u "https://sonarcloud.io"  \ 
         -t "${{ secrets.SONAR_TOKEN }}" \
         -o "$sonar_organization_name" \

@@ -95,7 +95,7 @@ function main {
 #- cli
 function setBranchSpecifier {
     local basis="/d:sonar.branch.name=$1"
-    if [ $1 = "master" ]; then
+    if [[ $1 = "master" ]]; then
         BRANCH_SPECIFIER="$basis"
     else
         BRANCH_SPECIFIER="$basis /d:sonar.pullrequest.github.repository=$GITHUB_REPOSITORY_IDENTIFIER \
