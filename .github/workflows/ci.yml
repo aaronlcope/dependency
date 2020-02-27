@@ -6,7 +6,7 @@ on:
     - master # Only fire for commits on master branch
     pull_request:
     - types: [opened, edited] # Only fire for opened and edited pull requests.
-
+#comment added just to kick the workflow on github.
 jobs:
   build:
 
