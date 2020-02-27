@@ -33,6 +33,7 @@ jobs:
     - name: quality
       run: |
         sonar_host_url="https://sonarcloud.io"
+        github_commits_url=$(jq .repository.commits_url "$GITHUB_EVENT_PATH")
         github_pullrequest_number=$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
         github_event_action=$(jq -r ".action" "$GITHUB_EVENT_PATH")
         github_branch_ref="${{ github.ref }}"
@@ -52,7 +53,8 @@ jobs:
         echo "github pull request number: $github_pullrequest_number"
         echo "github event action: $github_event_action"
         echo "github event path: $GITHUB_EVENT_PATH"
-        cat "$GITHUB_EVENT_PATH"
+        #cat "$GITHUB_EVENT_PATH"
+        echo "commits url: $github_commits_url"
         
         #dotnet tool install dotnet-sonarscanner --tool-path "$HOME/.dotnet/tools"
         #export PATH="$PATH:$HOME/.dotnet/tools"
