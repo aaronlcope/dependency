@@ -6,7 +6,7 @@ on:
     - master # Only fire for commits on master branch
     pull_request:
     - types: [opened, edited] # Only fire for opened and edited pull requests.
-#comment added just to kick the workflow on github.
+
 jobs:
   build:
 
@@ -19,71 +19,15 @@ jobs:
       with:
         dotnet-version: 3.1.102
     
-    - name: compile
-      run: dotnet build ./src/*.csproj --configuration Release
-    
-    - name: test
-      run: dotnet test ./test/*.csproj --no-build
-    
-    - name: jq?
-      run: |
-        which jq
-        type jq
-    
-    #- name: install jq
-    #  run: |
-    #  apt-get update
-    #  apt-get install --no-install-recommends -y jq findutils curl ca-certificates  
+    - name: Setup NuGet.exe for use with actions
+      uses: NuGet/setup-nuget@master
 
-    - name: quality
+    - name: run ci
       run: |
-        sonar_host_url="https://sonarcloud.io"
-        github_commits_url=$(jq .repository.commits_url "$GITHUB_EVENT_PATH")
-        github_pullrequest_number=$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
-        github_event_action=$(jq -r ".action" "$GITHUB_EVENT_PATH")
-        github_branch_ref="${{ github.ref }}"
-        github_branch_name=${github_branch_ref##*/}  # retain the part after the last slash 
-        github_repository_key="${{ github.repository }}" 
-        sonar_organization_name=${github_repository_key%%/*} # retain the part before the last slash 
-        sonar_project_name=${github_repository_key##*/}  # retain the part after the last slash 
-        sonar_project_key="${sonar_organization_name}_${sonar_project_name}"
-        echo "===BEFORE SCRIPT==="
-        echo "sonar host url: $sonar_host_url"
-        echo "sonar organization: $sonar_organization_name"
-        echo "sonar project key: $sonar_project_key"
-        echo "sonar project name: $sonar_project_name"
-        echo "github repository key: $github_repository_key"
-        echo "github branch ref: $github_branch_ref"
-        echo "github branch name: $github_branch_name"
-        echo "github pull request number: $github_pullrequest_number"
-        echo "github event action: $github_event_action"
-        echo "github event path: $GITHUB_EVENT_PATH"
-        #cat "$GITHUB_EVENT_PATH"
-        echo "commits url: $github_commits_url"
-        
-        #dotnet tool install dotnet-sonarscanner --tool-path "$HOME/.dotnet/tools"
-        #export PATH="$PATH:$HOME/.dotnet/tools"
-        #./scripts/quality.sh -u "$sonar_host_url" -t "${{ secrets.SONAR_TOKEN }}" -o "$sonar_organization_name" -k "$sonar_project_key" -n "$sonar_project_name" -g "$github_repository_key" -r "$github_branch_ref" -b "$github_branch_name" -p "$github_pullrequest_number" -e "$github_event_action"
+      sonar_host_url="https://sonarcloud.io"
+      sonar_organization_name=${github_repository_key%%/*} # retain the part before the last slash 
+      sonar_project_name=${github_repository_key##*/}  # retain the part after the last slash 
+      ./scripts/ci.sh -u "$sonar_host_url" -t "${{ secrets.SONAR_TOKEN }}" -o "$sonar_organization_name" -k "$sonar_project_key" -n "$sonar_project_name" -b "master"
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-
-    #- name: SonarCloud Scan
-    #  uses: sonarsource/sonarcloud-github-action@master
-    #  with:
-    #    projectBaseDir: src
-    #  env:
-    #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    #    SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-
-    - name: package
-      run: dotnet pack ./src/*.csproj --configuration Release
-    
-    - name: Setup NuGet.exe for use with actions
-      uses: NuGet/setup-nuget@master
-      
-    - name: add nuget source
-      run: nuget sources Add -Name "github" -Source "https://nuget.pkg.github.com/aaronlcope/index.json" -Username "aaroncope@gmail.com" -Password ${{secrets.GITHUB_TOKEN}}
-      
-    - name: push
-      run: nuget push -Source "github" ./src/**/*/*.nupkg -SkipDuplicate
