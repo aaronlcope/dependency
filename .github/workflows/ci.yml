@@ -33,8 +33,8 @@ jobs:
     - name: quality
       run: |
         sonar_host_url="https://sonarcloud.io"
-        github_pullrequest_number=$(jq --raw-output .pull_request.number "${{ github.event_path }}")
-        github_event_action=$(jq -r ".action" "${{ github.event_path }}")
+        github_pullrequest_number=$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
+        github_event_action=$(jq -r ".action" "$GITHUB_EVENT_PATH")
         github_branch_ref="${{ github.ref }}"
         github_branch_name=${github_branch_ref##*/}  # retain the part after the last slash 
         github_repository_key="${{ github.repository }}" 
