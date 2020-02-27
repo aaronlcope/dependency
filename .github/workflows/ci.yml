@@ -1,6 +1,11 @@
 name: ci
 
-on: [push]
+on: 
+  push:
+    branches: 
+    - master # Only fire for commits on master branch
+  pull_request:
+    - types: [opened, edited] # Only fire for opened and edited pull requests.
 
 jobs:
   build:
