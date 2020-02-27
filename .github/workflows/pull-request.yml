@@ -14,5 +14,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH_PREFIX: ""
           PULL_REQUEST_BRANCH: "master"
+          PULL_REQUEST_TITLE: "Automated pull request"
+          PULL_REQUEST_BODY: "Automated pull request"
 #test
 #another change
