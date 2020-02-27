@@ -72,16 +72,6 @@ done
 #- Main function
 function main {
     
-    #if [[ "${GITHUB_EVENT_NAME}" == "pull_request" ]]; then
-    #    GITHUB_EVENT_ACTION=$(jq -r ".action" "${GITHUB_EVENT_PATH}")
-    #    if [[ "${GITHUB_EVENT_ACTION}" != "opened" ]]; then
-    #        echo "No need to run analysis. It is already triggered by the push event."
-    #        exit 78
-    #    else
-
-    #    fi
-    #fi
-
     dir="$(pwd)"
     setBranchSpecifier $GITHUB_BRANCH_NAME
     version=$(parseCsProjVersion "src/$SONAR_PROJECT_NAME.csproj")
