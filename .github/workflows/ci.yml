@@ -51,7 +51,8 @@ jobs:
         echo "github branch name: $github_branch_name"
         echo "github pull request number: $github_pullrequest_number"
         echo "github event action: $github_event_action"
-        echo "github event path: $GITHUB_EVENT_PATH"     
+        echo "github event path: $GITHUB_EVENT_PATH"
+        cat "$GITHUB_EVENT_PATH"
         
         #dotnet tool install dotnet-sonarscanner --tool-path "$HOME/.dotnet/tools"
         #export PATH="$PATH:$HOME/.dotnet/tools"
