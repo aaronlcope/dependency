@@ -12,8 +12,9 @@ jobs:
     steps:
       - name: debug
         run: |
-        echo "event ref: ${{ github.event.ref }}"
-        echo "ref: ${{ github.ref }}"
+          echo "event ref: ${{ github.event.ref }}"
+          echo "ref: ${{ github.ref }}"
+
       - name: pull-request-action 
         uses: vsoch/pull-request-action@master
         env:
