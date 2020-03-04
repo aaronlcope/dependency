@@ -45,7 +45,8 @@ namespace dependency.test
         public void ShouldThrowExceptionWhenProvidedWhitespaceAudience()
         {
             var salutation = initSalutation();
-            Assert.Throws<ArgumentNullException>(() => salutation.Compose("  "));
+            var ex = Assert.Throws<ArgumentNullException>(() => salutation.Compose("  "));
+            Assert.Equal("audience", ex.ParamName);
         }
         
         #endregion
