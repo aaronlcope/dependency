@@ -2,7 +2,8 @@ name: auto-pr
 
 on: 
   push:
-
+    branches-ignore:
+      - master
 jobs:
 
   print-context:

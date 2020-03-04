@@ -2,6 +2,8 @@ name: ci
 
 on: 
   push:
+    branches:
+      - master
   pull_request:
     types: [opened, edited, synchronize, reopened]
     
@@ -44,7 +46,7 @@ jobs:
           echo "github pull request number: $github_pullrequest_number"
           echo "github event action: $github_event_action"
           echo "github event path: $GITHUB_EVENT_PATH"
-          cat "$GITHUB_EVENT_PATH"
+          #cat "$GITHUB_EVENT_PATH"
           echo "commits url: $github_commits_url"
           dotnet tool install dotnet-sonarscanner --tool-path "$HOME/.dotnet/tools"
           export PATH="$PATH:$HOME/.dotnet/tools"
