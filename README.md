@@ -16,7 +16,7 @@
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=aaronlcope_dependency&metric=coverage)](https://sonarcloud.io/dashboard?id=aaronlcope_dependency)
 [![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=aaronlcope_dependency&metric=duplicated_lines_density)](https://sonarcloud.io/dashboard?id=aaronlcope_dependency)
 
-
+## intent
 This is a very simple example that illustrates some core tenants of continuous integration with microservices built in dotnet core.
 
 ### sample continuous integration workflow
