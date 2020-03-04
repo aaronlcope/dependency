@@ -48,18 +48,6 @@ case $key in
     GITHUB_PULLREQUEST_NUMBER="$2"
     shift #past arg
     ;;
-    -e|--github-event-name)
-    GITHUB_EVENT_NAME="$2"
-    shift #past arg
-    ;;
-    -x|--github-event-path)
-    GITHUB_EVENT_PATH="$2"
-    shift #past arg
-    ;;
-    -a|--github-event-action)
-    GITHUB_EVENT_ACTION="$2"
-    shift #past arg
-    ;;
     *)
         #unknown option
         args+=($1)
@@ -107,11 +95,11 @@ function main {
 #- for the sonar
 #- cli
 function setBranchSpecifier {
-    local basis="/d:sonar.branch.name=$1"
+    local always_on="/d:sonar.branch.name=$1"
     if [[ $1 = "master" ]]; then
-        BRANCH_SPECIFIER="$basis"
+        BRANCH_SPECIFIER="$always_on"
     else
-        BRANCH_SPECIFIER="$basis /d:sonar.pullrequest.github.repository=$GITHUB_REPOSITORY_IDENTIFIER \
+        BRANCH_SPECIFIER="$always_on /d:sonar.pullrequest.github.repository=$GITHUB_REPOSITORY_IDENTIFIER \
         /d:sonar.pullrequest.key=$GITHUB_PULLREQUEST_NUMBER \
         /d:sonar.pullrequest.branch=$GITHUB_PULLREQUEST_BRANCH_REF \
         /d:sonar.pullrequest.base=master"
