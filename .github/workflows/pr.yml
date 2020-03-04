@@ -8,7 +8,7 @@ jobs:
 
   auto-pr: 
     runs-on: ubuntu-latest
-    if: github.event.ref != 'refs/heads/master' && !contains(github.ref, 'pull') && !contains(github.ref, 'merge')
+    if: github.event.ref != 'refs/heads/master' && (jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH") == null
     steps:
       - name: debug
         run: |
