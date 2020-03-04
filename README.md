@@ -19,7 +19,7 @@
 ## intent
 This is a very simple example that illustrates some core tenants of continuous integration with microservices built in dotnet core.
 
-### sample continuous integration workflow
+## example workflow
 - Inspect the .github/workflows/ci.yml file.
 
 - By default, GitHub invokes this action on the events that are listened to, defined in this file. We are listening to: 
