@@ -1,6 +1,8 @@
 # dependency ![ci](https://github.com/aaronlcope/dependency/workflows/ci/badge.svg) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=aaronlcope_dependency&metric=alert_status)](https://sonarcloud.io/dashboard?id=aaronlcope_dependency)
 
 ## quality outlook
+[![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-orange.svg)](https://sonarcloud.io/dashboard?id=aaronlcope_dependency)
+
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=aaronlcope_dependency&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=aaronlcope_dependency)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=aaronlcope_dependency&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=aaronlcope_dependency)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=aaronlcope_dependency&metric=security_rating)](https://sonarcloud.io/dashboard?id=aaronlcope_dependency)
