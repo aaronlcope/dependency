@@ -95,11 +95,10 @@ function main {
 #- for the sonar
 #- cli
 function setBranchSpecifier {
-    local always_on="/d:sonar.branch.name=$1"
     if [[ $1 = "master" ]]; then
-        BRANCH_SPECIFIER="$always_on"
+        BRANCH_SPECIFIER="/d:sonar.branch.name=$1"
     else
-        BRANCH_SPECIFIER="$always_on /d:sonar.pullrequest.github.repository=$GITHUB_REPOSITORY_IDENTIFIER \
+        BRANCH_SPECIFIER="/d:sonar.pullrequest.github.repository=$GITHUB_REPOSITORY_IDENTIFIER \
         /d:sonar.pullrequest.key=$GITHUB_PULLREQUEST_NUMBER \
         /d:sonar.pullrequest.branch=$GITHUB_PULLREQUEST_BRANCH_REF \
         /d:sonar.pullrequest.base=master"
