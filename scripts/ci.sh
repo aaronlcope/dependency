@@ -114,7 +114,7 @@ function main {
     dotnet pack ./src/*.csproj --configuration Release
 
     # add nuget source
-    nuget sources Add -Name "github" -Source "https://nuget.pkg.github.com/$ORGANIZATION/index.json" -Username "aaroncope@gmail.com" -Password ${{secrets.GITHUB_TOKEN}}
+    nuget sources Add -Name "github" -Source "https://nuget.pkg.github.com/$ORGANIZATION/index.json" -Username "aaroncope@gmail.com" -Password $GITHUB_TOKEN
 
     # push
     nuget push -Source "github" ./src/**/*/*.nupkg -SkipDuplicate
