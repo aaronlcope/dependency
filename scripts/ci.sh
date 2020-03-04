@@ -85,9 +85,9 @@ function sonar {
 
 #---------------
 function setScriptEnvironmentVariables {
-    local github_repository_key="$GITHUB_REPOSITORY" 
-    ORGANIZATION=${github_repository_key%%/*} # retain the part before the last slash 
-    SONAR_PROJECT_NAME=${github_repository_key##*/}  # retain the part after the last slash
+    GITHUB_REPOSITORY_IDENTIFIER="$GITHUB_REPOSITORY" 
+    ORGANIZATION=${GITHUB_REPOSITORY_IDENTIFIER%%/*} # retain the part before the last slash 
+    SONAR_PROJECT_NAME=${GITHUB_REPOSITORY_IDENTIFIER##*/}  # retain the part after the last slash
     SONAR_PROJECT_KEY="${ORGANIZATION}_${SONAR_PROJECT_NAME}"
     GITHUB_PULLREQUEST_BRANCH_REF="$GITHUB_REF"
     GITHUB_BRANCH_NAME=${GITHUB_PULLREQUEST_BRANCH_REF##*/}  # retain the part after the last slash 
