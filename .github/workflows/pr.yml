@@ -36,7 +36,7 @@ jobs:
 
   auto-pr: 
     runs-on: ubuntu-latest
-    if: github.event.ref != 'refs/heads/master' # Skip on master
+    if: github.event.ref != 'refs/heads/master' && !contains(github.event.ref, 'pull') !contains(github.event.ref, 'merge')
     steps:
       - name: pull-request-action 
         uses: vsoch/pull-request-action@master
