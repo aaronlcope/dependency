@@ -1,4 +1,19 @@
 # dependency ![ci](https://github.com/aaronlcope/dependency/workflows/ci/badge.svg) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=aaronlcope_dependency&metric=alert_status)](https://sonarcloud.io/dashboard?id=aaronlcope_dependency)
+
+## quality outlook
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=aaronlcope_dependency&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=aaronlcope_dependency)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=aaronlcope_dependency&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=aaronlcope_dependency)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=aaronlcope_dependency&metric=security_rating)](https://sonarcloud.io/dashboard?id=aaronlcope_dependency)
+
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=aaronlcope_dependency&metric=bugs)](https://sonarcloud.io/dashboard?id=aaronlcope_dependency)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=aaronlcope_dependency&metric=code_smells)](https://sonarcloud.io/dashboard?id=aaronlcope_dependency)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=aaronlcope_dependency&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=aaronlcope_dependency)
+[![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=aaronlcope_dependency&metric=sqale_index)](https://sonarcloud.io/dashboard?id=aaronlcope_dependency)
+
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=aaronlcope_dependency&metric=coverage)](https://sonarcloud.io/dashboard?id=aaronlcope_dependency)
+[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=aaronlcope_dependency&metric=duplicated_lines_density)](https://sonarcloud.io/dashboard?id=aaronlcope_dependency)
+
+
 This is a very simple example that illustrates some core tenants of continuous integration with microservices built in dotnet core.
 
 ### sample continuous integration workflow
